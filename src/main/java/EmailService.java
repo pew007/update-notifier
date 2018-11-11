@@ -8,7 +8,7 @@ import java.util.Properties;
 
 class EmailService {
 
-    private static final String contentType = "text/html";
+    private static final String contentType = "text/plain";
     private static final String protocol = "smtp";
     private static final String host = "smtp.gmail.com";
 

@@ -30,13 +30,13 @@ class EmailServiceTest {
         Assertions.assertEquals(subject, message.getSubject());
         Assertions.assertEquals(body, message.getContent());
         Assertions.assertEquals(1, message.getAllRecipients().length);
-        Assertions.assertEquals("text/html", message.getContentType());
+        Assertions.assertEquals("text/plain", message.getContentType());
     }
 
     @Test
     void send() throws MessagingException {
         String subject = "test";
-        String body = "<h1>This is a test</h1>";
+        String body = "This is a test";
         String[] recipients = {"pyxwang@gmail.com"};
 
         MimeMessage message = emailService.generateMessage(subject, body, recipients);
