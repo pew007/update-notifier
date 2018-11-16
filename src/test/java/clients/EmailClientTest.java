@@ -1,28 +1,30 @@
+package clients;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+class EmailClientTest {
 
-class EmailServiceTest {
-
-    private EmailService emailService;
+    private EmailClient emailService;
 
     @BeforeEach
     void setUp() {
-        emailService = new EmailService();
+        emailService = new EmailClient();
     }
 
     @Test
     void generateMessage() throws MessagingException, IOException {
         String subject = "test";
         String body = "<h1>This is a test</h1>";
-        String[] recipients = {"test@test.com"};
+        List<String> recipients = new ArrayList<>();
+        recipients.add("test@test.com");
 
         MimeMessage message = emailService.generateMessage(subject, body, recipients);
 
@@ -37,9 +39,9 @@ class EmailServiceTest {
     void send() throws MessagingException {
         String subject = "test";
         String body = "This is a test";
-        String[] recipients = {"pyxwang@gmail.com"};
+        List<String> recipients = new ArrayList<>();
+        recipients.add("pyxwang@gmail.com");
 
-        MimeMessage message = emailService.generateMessage(subject, body, recipients);
-        emailService.send(message);
+        emailService.send(subject, body, recipients);
     }
 }

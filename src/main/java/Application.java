@@ -1,10 +1,15 @@
 import io.reactivex.Observable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 public class Application {
 
     public static void main(String[] args) {
-        Observable.just("Hello World").subscribe(line -> System.out.println(line));
-
-        Observable.range(0, 10).subscribe(integer -> System.out.println(integer + 10));
+        String file = args[0];
+        Parser parser = new Parser();
+        parser.readFile(file);
+        Vector<WebPage> webPages = parser.getWebPages();
     }
 }
