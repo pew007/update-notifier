@@ -1,5 +1,7 @@
 package clients;
 
+import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,11 +14,11 @@ import java.util.List;
 
 class EmailClientTest {
 
-    private EmailClient emailService;
+    private MockEmailClient emailClient;
 
     @BeforeEach
     void setUp() {
-        emailService = new EmailClient();
+        emailClient = new MockEmailClient();
     }
 
     @Test
@@ -26,7 +28,7 @@ class EmailClientTest {
         List<String> recipients = new ArrayList<>();
         recipients.add("test@test.com");
 
-        MimeMessage message = emailService.generateMessage(subject, body, recipients);
+        MimeMessage message = emailClient.generateMessage(subject, body, recipients);
 
         Assertions.assertNotNull(message);
         Assertions.assertEquals(subject, message.getSubject());
@@ -42,6 +44,8 @@ class EmailClientTest {
         List<String> recipients = new ArrayList<>();
         recipients.add("pyxwang@gmail.com");
 
-        emailService.send(subject, body, recipients);
+        emailClient.send(subject, body, recipients);
+
+        verify(emailClient.transport, times(1)).sendMessage(any(), any());
     }
 }
