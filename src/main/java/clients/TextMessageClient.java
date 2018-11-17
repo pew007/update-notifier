@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TextMessageClient {
 
-    private EmailClient emailClient;
+    EmailClient emailClient;
 
     public TextMessageClient() {
         this.emailClient = this.emailClient();
