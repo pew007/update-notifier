@@ -2,7 +2,6 @@ package notifiers;
 
 import clients.EmailClient;
 
-import javax.mail.Message;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +24,9 @@ public class EmailNotifier implements Notifiable {
     }
 
     @Override
-    public void notifyChange(String message) {
+    public void notifyChange(String subject, String message) {
         try {
-            emailClient.send("", message, recipients);
+            emailClient.send(subject, message, recipients);
         } catch (Exception e) {
             e.printStackTrace();
         }

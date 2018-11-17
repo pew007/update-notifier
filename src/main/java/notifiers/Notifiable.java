@@ -1,5 +1,5 @@
 package notifiers;
 
 public interface Notifiable {
-    public void notifyChange(String message);
+    void notifyChange(String subject, String message);
 }

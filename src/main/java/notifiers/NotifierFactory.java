@@ -8,14 +8,15 @@ public class NotifierFactory {
                 return new ConsoleNotifier();
             case "mail":
                 String recipient = args[0];
-                EmailNotifier notifier = new EmailNotifier();
-                notifier.addRecipient(recipient);
-
-                return notifier;
+                EmailNotifier emailNotifier = new EmailNotifier();
+                emailNotifier.addRecipient(recipient);
+                return emailNotifier;
             case "sms":
-                String phone = args[0];
+                String number = args[0];
                 String carrier = args[1];
-                return new SmsNotifier();
+                SmsNotifier smsNotifier = new SmsNotifier();
+                smsNotifier.addRecipient(number, carrier);
+                return smsNotifier;
             default:
                 return null;
         }

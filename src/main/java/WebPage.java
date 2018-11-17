@@ -59,4 +59,9 @@ class WebPage {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        return address.toString();
+    }
 }
