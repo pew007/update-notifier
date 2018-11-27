@@ -31,6 +31,7 @@ class MockWebPage extends WebPage {
         futureDate = c.getTime();
 
         when(mockConnection.getLastModified()).thenReturn(futureDate.getTime());
+        when(mockConnection.getContentLength()).thenReturn(100);
         when(mockURL.openConnection()).thenReturn(mockConnection);
 
         return mockURL;

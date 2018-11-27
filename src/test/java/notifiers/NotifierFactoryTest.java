@@ -27,5 +27,7 @@ class NotifierFactoryTest {
     void createSmsNotifier() {
         String[] args = new String[]{"6262285115", "tmobile"};
         Notifiable notifier = NotifierFactory.create("sms", args);
+
+        Assertions.assertTrue(notifier instanceof SmsNotifier);
     }
 }

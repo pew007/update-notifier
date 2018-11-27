@@ -37,7 +37,7 @@ class WebPage {
         return lastModifiedDateChanged() || contentLengthChanged();
     }
 
-    boolean lastModifiedDateChanged() throws IOException {
+    private boolean lastModifiedDateChanged() throws IOException {
         URL address = this.address;
         URLConnection connect = address.openConnection();
 
@@ -57,7 +57,7 @@ class WebPage {
         return false;
     }
 
-    boolean contentLengthChanged() throws IOException {
+    private boolean contentLengthChanged() throws IOException {
         URL address = this.address;
         URLConnection connection = address.openConnection();
 
