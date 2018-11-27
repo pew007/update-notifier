@@ -12,7 +12,7 @@ public class EmailClient {
     private static final String protocol = "smtp";
     private static final String host = "smtp.gmail.com";
 
-    Transport transport;
+    private Transport transport;
     private Session session;
     private String user;
     private String pass;
@@ -36,6 +36,10 @@ public class EmailClient {
         } catch (Exception exception) {
             return null;
         }
+    }
+
+    public Transport getTransport() {
+        return transport;
     }
 
     public void send(String subject, String emailBody, List<String> recipients) throws MessagingException {

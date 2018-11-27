@@ -2,7 +2,7 @@ package notifiers;
 
 import clients.TextMessageClient;
 
-import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,24 +11,27 @@ import java.util.stream.Stream;
 
 public class SmsNotifier implements Notifiable {
 
-    private List<String> recipients;
+    private List<String> recipients = new ArrayList<>();
     private TextMessageClient messageClient;
 
-    public static final Map<String, String> carrierDomainMap = Stream.of(
-            new AbstractMap.SimpleEntry<>("alltel", "mms.alltelwireless.com"),
-            new AbstractMap.SimpleEntry<>("att", "mms.att.net"),
-            new AbstractMap.SimpleEntry<>("boostmobile", "myboostmobile.com"),
-            new AbstractMap.SimpleEntry<>("cricket", "mms.cricketwireless.net"),
-            new AbstractMap.SimpleEntry<>("fi", "msg.fi.google.com"),
-            new AbstractMap.SimpleEntry<>("sprint", "pm.sprint.com"),
-            new AbstractMap.SimpleEntry<>("tmobile", "tmomail.net"),
-            new AbstractMap.SimpleEntry<>("uscellular", "mms.uscc.net"),
-            new AbstractMap.SimpleEntry<>("verizon", "vzwpix.com")
-    ).collect(Collectors.toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
+    private static final Map<String, String> carrierDomainMap = Stream.of(
+            new SimpleEntry<>("alltel", "mms.alltelwireless.com"),
+            new SimpleEntry<>("att", "mms.att.net"),
+            new SimpleEntry<>("boostmobile", "myboostmobile.com"),
+            new SimpleEntry<>("cricket", "mms.cricketwireless.net"),
+            new SimpleEntry<>("fi", "msg.fi.google.com"),
+            new SimpleEntry<>("sprint", "pm.sprint.com"),
+            new SimpleEntry<>("tmobile", "tmomail.net"),
+            new SimpleEntry<>("uscellular", "mms.uscc.net"),
+            new SimpleEntry<>("verizon", "vzwpix.com")
+    ).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
 
     SmsNotifier() {
-        this.recipients = new ArrayList<>();
         this.messageClient = this.messageClient();
+    }
+
+    SmsNotifier(TextMessageClient client) {
+        this.messageClient = client;
     }
 
     void addRecipient(String number, String carrier) {

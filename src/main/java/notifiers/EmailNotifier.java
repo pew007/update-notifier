@@ -15,7 +15,12 @@ public class EmailNotifier implements Notifiable {
         this.emailClient = this.emailClient();
     }
 
-    EmailClient emailClient() {
+    EmailNotifier(EmailClient client) {
+        this.recipients = new ArrayList<>();
+        this.emailClient = client;
+    }
+
+    private EmailClient emailClient() {
         return new EmailClient();
     }
 

@@ -15,6 +15,10 @@ public class TextMessageClient {
         return new EmailClient();
     }
 
+    public EmailClient getEmailClient() {
+        return this.emailClient;
+    }
+
     public void send(String subject, String message, List<String> recipients) throws MessagingException {
         emailClient.send(subject, message, recipients);
     }

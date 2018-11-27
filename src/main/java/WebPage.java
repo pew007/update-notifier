@@ -12,10 +12,12 @@ class WebPage {
     private URL address;
     private Set<Notifiable> notifiers;
     Date lastModifiedDate;
+    int currentContentLength;
 
     WebPage(String url) throws IOException {
         this.address = url(url);
         this.lastModifiedDate = null;
+        this.currentContentLength = 0;
         this.notifiers = new HashSet<>();
     }
 
@@ -32,8 +34,13 @@ class WebPage {
     }
 
     boolean changed() throws IOException {
+        return lastModifiedDateChanged() || contentLengthChanged();
+    }
+
+    boolean lastModifiedDateChanged() throws IOException {
         URL address = this.address;
         URLConnection connect = address.openConnection();
+
         long time = connect.getLastModified();
         Date modifiedDate = new Date(time);
 
@@ -44,6 +51,25 @@ class WebPage {
 
         if (modifiedDate.compareTo(lastModifiedDate) > 0) {
             lastModifiedDate = modifiedDate;
+            return true;
+        }
+
+        return false;
+    }
+
+    boolean contentLengthChanged() throws IOException {
+        URL address = this.address;
+        URLConnection connection = address.openConnection();
+
+        int contentLength = connection.getContentLength();
+
+        if (currentContentLength == 0) {
+            currentContentLength = contentLength;
+            return false;
+        }
+
+        if (currentContentLength != contentLength) {
+            currentContentLength = contentLength;
             return true;
         }
 

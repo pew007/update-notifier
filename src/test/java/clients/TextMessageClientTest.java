@@ -18,6 +18,6 @@ class TextMessageClientTest {
         recipients.add("6262285115@tmomail.net");
         client.send("subject", "test message", recipients);
 
-        verify(client.emailClient.transport, times(1)).sendMessage(any(), any());
+        verify(client.emailClient.getTransport(), times(1)).sendMessage(any(), any());
     }
 }

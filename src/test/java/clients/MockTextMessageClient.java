@@ -1,6 +1,6 @@
 package clients;
 
-class MockTextMessageClient extends TextMessageClient {
+public class MockTextMessageClient extends TextMessageClient {
 
     @Override
     EmailClient emailClient() {

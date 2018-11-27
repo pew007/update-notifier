@@ -4,9 +4,9 @@ import javax.mail.Transport;
 
 import static org.mockito.Mockito.*;
 
-class MockEmailClient extends EmailClient {
+public class MockEmailClient extends EmailClient {
 
-    MockEmailClient() {
+    public MockEmailClient() {
         super();
     }
 

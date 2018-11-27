@@ -46,6 +46,6 @@ class EmailClientTest {
 
         emailClient.send(subject, body, recipients);
 
-        verify(emailClient.transport, times(1)).sendMessage(any(), any());
+        verify(emailClient.getTransport(), times(1)).sendMessage(any(), any());
     }
 }
